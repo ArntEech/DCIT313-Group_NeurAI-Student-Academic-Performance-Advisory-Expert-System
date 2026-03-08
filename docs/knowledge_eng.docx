@@ -1,0 +1,317 @@
+1. High-Level System Architecture
+Your system will follow a 3-layer Expert System Architecture.
+
+2. Mapping of Intelligent Agent Model
+Your project must show AI agent behavior.
+Agent Components
+Agent Component
+SAPAES Implementation
+Perception
+Student input (score, attendance, trend)
+Environment
+Academic evaluation domain
+Reasoning
+Prolog rule inference
+Action
+Risk classification + recommendation
+
+Agent Mapping
+Percepts:
+ average_score
+ attendance
+ performance_trend
+
+↓
+
+Inference Rules (Prolog)
+
+↓
+
+Actions:
+ risk_level
+ recommendation
+ explanation
+
+3. Repository System Structure (MANDATORY)
+Your GitHub repository should look like this:
+DCIT313-GroupAI-SAPAES
+│
+├── knowledge_base
+│   └── academic_rules.pl
+│
+├── interface
+│   └── main.py
+│
+├── docs
+│   ├── knowledge_acquisition.md
+│   └── system_report.pdf
+│
+└── README.md
+Folder Roles
+Folder
+Purpose
+AI Role
+knowledge_base
+Prolog rules
+Intelligence
+interface
+Python interaction
+User interaction
+docs
+knowledge engineering
+Documentation
+
+
+4. Component-Level Design
+4.1 User Interface (Python)
+The UI collects:
+Average Score
+
+
+Attendance
+
+
+Performance Trend
+
+
+Example interaction:
+Enter student average score: 38
+Enter attendance percentage: 55
+Enter performance trend (improving/declining/stable):
+Responsibilities:
+Collect user input
+
+
+Send facts to Prolog
+
+
+Display results
+
+
+Python does NOT contain logic rules (important for marks).
+
+4.2 Knowledge Base (Prolog)
+This is where the intelligence lives.
+File:
+knowledge_base/academic_rules.pl
+Example rules:
+high_risk(Score, Attendance) :-
+   Score < 40,
+   Attendance < 60.
+
+moderate_risk(Score) :-
+   Score >= 40,
+   Score =< 50.
+
+excellent_student(Score, Attendance) :-
+   Score > 75,
+   Attendance > 80.
+Recommendations:
+recommendation(high, "Immediate counseling and remedial classes").
+
+recommendation(moderate, "Enroll in remedial program").
+
+recommendation(excellent, "Advanced coursework recommended").
+Explanation rule:
+explain(high, "Average score below 40 and attendance below 60%").
+
+4.3 Inference Engine
+The inference engine is SWI-Prolog's reasoning engine.
+Reasoning type:
+Forward Chaining
+Steps:
+Facts inserted
+
+
+Rules evaluated
+
+
+Matching rules fired
+
+
+Conclusion generated
+
+
+Example reasoning:
+Input:
+Score = 38
+Attendance = 55
+
+Rule Triggered:
+Score < 40 AND Attendance < 60
+
+Conclusion:
+High Risk
+
+4.4 Python–Prolog Interface
+Python communicates with Prolog using pyswip.
+Example design:
+Python
+ ↓
+pyswip bridge
+ ↓
+SWI-Prolog Knowledge Base
+Example query flow:
+Python → Prolog
+
+query:
+risk_level(38,55,Risk).
+
+Prolog response:
+Risk = high
+
+5. System Workflow
+Step 1 — User Input
+User enters:
+Score = 38
+Attendance = 55
+Trend = declining
+
+Step 2 — Fact Creation
+Python sends facts to Prolog.
+student(38,55,declining).
+
+Step 3 — Rule Matching
+Prolog checks rules.
+Example:
+Score < 40
+Attendance < 60
+Rule satisfied.
+
+Step 4 — Inference
+System infers:
+Risk = High
+Recommendation = Counseling
+
+Step 5 — Explanation
+System returns reasoning.
+Explanation:
+Score below 40 and attendance below 60%.
+
+Step 6 — Output
+Displayed to the user:
+===== SAPAES RESULT =====
+
+Risk Level: HIGH
+
+Recommendation:
+- Immediate Academic Counseling
+- Enroll in Remedial Classes
+
+Explanation:
+Average score below 40 and attendance below 60%.
+
+6. Data Flow Diagram (DFD)
+Level 0
+User
+ │
+ ▼
+Student Data Input
+ │
+ ▼
+Inference Engine (Prolog)
+ │
+ ▼
+Expert System Decision
+ │
+ ▼
+Recommendation + Explanation
+
+7. Rule Evaluation Flow
+START
+
+Collect student data
+
+↓
+Evaluate rules
+
+↓
+Is score < 40 AND attendance < 60 ?
+
+YES → High Risk
+
+NO
+
+↓
+Is score between 40 and 50 ?
+
+YES → Moderate Risk
+
+NO
+
+↓
+Is score > 75 AND attendance > 80 ?
+
+YES → Excellent
+
+↓
+Generate recommendation
+↓
+Show explanation
+
+END
+
+8. Key Design Principles (Important for TA)
+Your design follows:
+Separation of Concerns
+Layer
+Responsibility
+Python
+Interface
+Prolog
+Intelligence
+Docs
+Knowledge Engineering
+
+
+Rule-Based Reasoning
+All decisions are based on logical rules.
+Not Python if-else.
+
+Explainable AI
+Each decision includes WHY the system decided that.
+
+9. Testing Strategy
+Test cases required:
+Score
+Attendance
+Expected Result
+35
+50
+High Risk
+45
+70
+Moderate Risk
+80
+90
+Excellent
+55
+45
+Attendance Concern
+
+
+10. Technology Stack
+Technology
+Role
+Python
+Interface
+pyswip
+Bridge
+SWI-Prolog
+Logic engine
+GitHub
+Collaboration
+Markdown / PDF
+Documentation
+
+
+11. Why This Design Will Score High
+Your TA will check:
+✔ Intelligence in Prolog
+All reasoning in .pl.
+✔ Clean Architecture
+Folders follow required structure.
+✔ Explainable reasoning
+System explains conclusions.
+✔ Clear mapping
+Input → Rules → Conclusion
