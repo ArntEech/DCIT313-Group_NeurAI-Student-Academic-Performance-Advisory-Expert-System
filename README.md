@@ -37,7 +37,7 @@ The system is built using a decoupled architecture:
 ### Installation
 1. Clone the repository:
    ```bash
-   git clone [https://github.com/YourRepo/DCIT313-Group](https://github.com/YourRepo/DCIT313-Group)[Name]-SAPAES.git
+   git clone https://github.com/ArntEech/DCIT313-Group_NeurAI-Student-Academic-Performance-Advisory-Expert-System.git
   
 2. Install dependencies:
 ```bash
@@ -69,3 +69,4 @@ To maintain a professional audit trail for grading, all members must use the fol
 - Russell & Norvig, Artificial Intelligence: A Modern Approach (4th Ed).
 
 - Wolfgang Ertel, Introduction to Artificial Intelligence (2nd Ed).
+
