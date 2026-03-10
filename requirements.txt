@@ -1,0 +1,4 @@
+# SAPAES Python Dependencies
+pyswip>=0.2.10
+
+
