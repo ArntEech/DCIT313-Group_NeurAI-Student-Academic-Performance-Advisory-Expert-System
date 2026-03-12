@@ -13,4 +13,6 @@ def display_result(risk, advice, explanation):
     print(f"  Risk Level  : {risk_label}")
     print(f"  Advice      : {advice}")
     print(f"  Reasoning   : {explanation}")
+
+    
     print("=" * 54 + "\n")
